@@ -2,18 +2,27 @@ function makeUrl() {
   var input = document.getElementById("website");
   var target = document.getElementById("urlGo");
 
-  var link = document.createElement("link");
+  var link = document.createElement("a");
   link.href = input.value;
+  
+  var hostname = link.hostname;
+  var urlParts = hostname.replace('http://','').replace('www.','').replace('https://','').split(/[/?#]/);
+  var domain = urlParts[0];
 
-  whois = "https://whois.domaintools.com/";
-  domain = link.hostname;
+  whois = "https://www.whois.com/whois/";
+  ezreport = "https://www.easycounter.com/report/";
+  
+  console.log( domain );
 
-  if (url.value != "") {
+  if (input.value != "") {
     target.innerHTML = "<a target='_blank' href='" + input.value + "'>URL</a> | ";
-    target.innerHTML += "<a target='_blank' href='" + whois + domain + "'>Whois</a>";
+    target.innerHTML += "<a target='_blank' href='" + whois + domain + "'>Whois</a> | ";
+    target.innerHTML += "<a target='_blank' href='" + ezreport + domain + "'>Report</a>";
+    
+    
 
   } else
-    goToUrl.innerHTML = "";
+    target.innerHTML = "";
 }
 
 function getMap() {
